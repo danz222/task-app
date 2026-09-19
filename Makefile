@@ -15,7 +15,7 @@ env-down:
 env-cleanup:
 	@read -p "Очистить все volume файлы окружения? Опасность утери данных! [y/N]: " ans; \
 	if [ "$$ans" = "y" ]; then \
-		docker compose down taskapp-postgres && \
+		docker compose down taskapp-postgres port-forwarder && \
 		rm -rf out/pgdata && \
 		echo "Файлы окружение очищены!"; \
 	else \
@@ -55,3 +55,9 @@ migrate-action:
 		-database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@taskapp-postgres:5432/${POSTGRES_DB}?sslmode=disable \
 		"$(action)"
 
+
+taskapp-run:
+	@export LOGGER_FOLDER=${PROJECT_ROOT}/out/logs && \
+	export POSTGRES_HOST=localhost && \
+	go mod tidy && \
+	go run cmd/taskapp/main.go
