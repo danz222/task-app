@@ -15,8 +15,8 @@ func (r *UsersRepository) DeleteUser(
 	defer cancel()
 
 	query := `
-	DELETE from taskapp.users
-	WHERE ID=$1
+	DELETE FROM taskapp.users
+	WHERE ID=$1;
 	`
 
 	cmdTag, err := r.pool.Exec(ctx, query, id)
