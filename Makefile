@@ -73,5 +73,8 @@ taskapp-run:
 taskapp-deploy:
 	@docker compose up -d --build taskapp
 
+taskapp-undeploy:
+	@docker compose down taskapp
+
 ps:
 	@docker compose ps
