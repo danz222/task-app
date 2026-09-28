@@ -76,5 +76,13 @@ taskapp-deploy:
 taskapp-undeploy:
 	@docker compose down taskapp
 
+swagger-gen:
+	@docker compose run --rm swagger \
+	init \
+	-g cmd/taskapp/main.go \
+	-o docs \
+	--parseInternal \
+	--parseDependency
+
 ps:
 	@docker compose ps
